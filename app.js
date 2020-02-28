@@ -26,7 +26,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(
   cors({
-    origin: ['http://my-type.s3-website.ap-northeast-2.amazonaws.com'],
+    origin: [
+      'http://my-type.s3-website.ap-northeast-2.amazonaws.com',
+      'http://localhost:3000'
+    ],
     methods: ['GET', 'POST'],
     credentials: true
   })
