@@ -54,7 +54,10 @@ module.exports = {
 
   signUpController: (req, res) => {
     const { email, password, username, mobile } = req.body;
-
+    console.log(email);
+    console.log(password);
+    console.log(username);
+    console.log(mobile);
     users
       .findOrCreate({
         where: {
@@ -66,14 +69,16 @@ module.exports = {
           mobile: mobile
         }
       })
-      .then(async ([users, created]) => {
+      .then(([results, created]) => {
+        console.log('here!!!!!!!!!!!!!!!!!', created);
         if (!created) {
           // return res.status(409).send('email exists');
           return res.status(409).end();
+        } else {
+          res.status(200).end();
         }
         // const data = await users.get({ plain: true });
         // res.status(201).json(data);
-        res.status(200).end();
       })
       .catch(err => {
         res.status(404).send(err);

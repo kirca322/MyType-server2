@@ -27,7 +27,7 @@ app.use(
   })
 );
 
-app.use('/', userRouter);
+app.use('/user', userRouter);
 app.use('/videos', videosRouter);
 
 app.listen(port, () => {
