@@ -36,9 +36,19 @@ Object.keys(db).forEach(modelName => {
     db[modelName].associate(db);
   }
 });
-
+// mysql 커넥션 일치
 db.users = require('./users')(sequelize, Sequelize);
-db.categories = require('./categories.')(sequelize, Sequelize);
+db.users_categories = require('./users_categories')(sequelize, Sequelize);
+db.users_categories_video = require('./users_categories_video')(
+  sequelize,
+  Sequelize
+);
+db.categories = require('./categories')(sequelize, Sequelize);
+db.search_keywords = require('./search_keywords')(sequelize, Sequelize);
+
+// mysql 관계 정의
+
+// db.users.hasOne(db.users_categories,{foreignKey : })
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

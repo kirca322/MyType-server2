@@ -1,9 +1,9 @@
-const { categories } = require('../../models');
+const { search_keywords } = require('../../models');
 const fetchYoutube = require('../../fetchYoutube');
 
 module.exports = {
   get: (req, res) => {
-    categories
+    search_keywords
       .findOne({ where: { category_number: req.params.id } })
       .then(data => {
         fetchYoutube(data)

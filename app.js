@@ -5,22 +5,14 @@ var sequelize = require('./models').sequelize;
 sequelize.sync();
 
 const cors = require('cors');
-const session = require('express-session');
 const cookieParser = require('cookie-parser');
 
-const userRouter = require('./routes/user'); // 라우트의 유저파일을 이용합니다.
-const linksRouter = require('./routes/links'); // 라우트의 링크파일을 이용합니다.
+const userRouter = require('./routes/user');
+const videosRouter = require('./routes/videos');
 
 const app = express();
 const port = 3001;
 
-app.use(
-  session({
-    secret: '@kgb',
-    resave: false,
-    saveUninitialized: true
-  })
-);
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -35,8 +27,8 @@ app.use(
   })
 );
 
-app.use('/user', userRouter);
-app.use('/videos', linksRouter);
+app.use('/', userRouter);
+app.use('/videos', videosRouter);
 
 app.listen(port, () => {
   console.log(`app is listening in PORT ${port}`);

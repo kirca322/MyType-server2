@@ -1,26 +1,57 @@
 const { users } = require('../../models');
+const jwt = require('jsonwebtoken');
+const jwtObj = require('../../config/jwt');
 
 module.exports = {
+  infoController: (req, res) => {
+    let token = req.cookies.data;
+    // console.log(token);
+
+    let decoded = jwt.verify(token, jwtObj.secret);
+    if (decoded) {
+      users
+        .findOne({ where: { id: decoded.id } })
+        .then(data => {
+          res.status(200).send('ok');
+          res.end();
+        })
+        .catch(err => {
+          res.status(401).send('need user token');
+        });
+    }
+  },
+
   signInController: (req, res) => {
     const { email, password } = req.body;
-
+    // console.log(jwtObj);
     users
       .findOne({ where: { email: email, password: password } })
       .then(data => {
-        if (data === null) {
-          res.status(404).send('unvalid user');
+        if (data) {
+          let token = jwt.sign(
+            {
+              id: data.dataValues.id
+            },
+            jwtObj.secret,
+            {
+              expiresIn: '1d'
+            }
+          );
+
+          res.cookie('data', token);
+          // res.json({
+          //   token: token
+          // });
+          res.status(200).end();
         } else {
-          res.status(200).json(data.dataValues);
+          res.status(404).end();
         }
       })
       .catch(err => {
         res.status(404).send(err);
       });
   },
-  signOutController: (req, res) => {
-    res.redirect('/');
-    res.end();
-  },
+
   signUpController: (req, res) => {
     const { email, password, username, mobile } = req.body;
 
@@ -35,12 +66,17 @@ module.exports = {
           mobile: mobile
         }
       })
-      .then(async ([user, created]) => {
+      .then(async ([users, created]) => {
         if (!created) {
-          return res.status(409).send('email exists');
+          // return res.status(409).send('email exists');
+          return res.status(409).end();
         }
-        const data = await users.get({ plain: true }); // 해당 인스턴스의 데이터만 가져오기
-        res.status(201).json(data);
+        // const data = await users.get({ plain: true });
+        // res.status(201).json(data);
+        res.status(200).end();
+      })
+      .catch(err => {
+        res.status(404).send(err);
       });
   }
 };
