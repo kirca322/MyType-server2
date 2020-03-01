@@ -13,23 +13,13 @@ module.exports = {
       }], {});
     */
     return queryInterface.bulkInsert(
-      'categories',
+      'users',
       [
         {
-          category_number: 1,
-          item: '이별노래'
-        },
-        {
-          category_number: 2,
-          item: '내적댄스'
-        },
-        {
-          category_number: 3,
-          item: '잠안올때듣는노래'
-        },
-        {
-          category_number: 4,
-          item: '위로노래'
+          username: 'testname',
+          password: 'test',
+          email: 'test@gmail.com',
+          mobile: '010-1234-5678'
         }
       ],
       {}

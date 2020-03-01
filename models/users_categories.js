@@ -1,18 +1,20 @@
 module.exports = (sequelize, DataTypes) => {
   return sequelize.define(
-    'category',
+    'users_categories',
     {
-      category_number: {
+      categories_id: {
         type: DataTypes.INTEGER,
         allowNull: false
       },
-      item: {
+      users_id: {
         type: DataTypes.STRING,
         allowNull: false
       }
     },
     {
-      timestamps: false
+      timestamps: false,
+      charset: 'utf8',
+      collate: 'utf8_general_ci'
     }
   );
 };
