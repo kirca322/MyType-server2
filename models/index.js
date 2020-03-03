@@ -39,7 +39,7 @@ Object.keys(db).forEach(modelName => {
 // mysql 커넥션 일치
 db.users = require('./users')(sequelize, Sequelize);
 db.users_categories = require('./users_categories')(sequelize, Sequelize);
-db.users_categories_video = require('./users_categories_video')(
+db.users_categories_videos = require('./users_categories_videos')(
   sequelize,
   Sequelize
 );

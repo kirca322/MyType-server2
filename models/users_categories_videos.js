@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   return sequelize.define(
-    'users_categories_video',
+    'users_categories_videos',
     {
       video: {
         type: DataTypes.STRING,
