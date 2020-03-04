@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     'users_categories_videos',
     {
       video: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(1234),
         allowNull: false
       },
       users_categories_id: {
