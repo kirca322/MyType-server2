@@ -1,6 +1,6 @@
 {
   "development": {
-    "username": "root",
+    "username": "kirca",
     "password": "justin12",
     "database": "MyType",
     "host": "my-type-db.cp6g2u1aqbvj.us-east-2.rds.amazonaws.com",
