@@ -61,7 +61,7 @@ module.exports = {
             },
             jwtObj.secret,
             {
-              expiresIn: '1m'
+              expiresIn: '1h'
             }
           );
           res.status(200).json({
