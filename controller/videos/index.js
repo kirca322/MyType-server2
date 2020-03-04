@@ -20,7 +20,6 @@ module.exports = {
     const { searchValue } = req.body;
     fetchYoutube(searchValue)
       .then(res => res.json())
-
       .then(json => res.status(200).json(json.items))
       .catch(err => {
         console.log(err);
