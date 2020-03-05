@@ -50,14 +50,20 @@ module.exports = {
     });
   },
   signInController: (req, res) => {
-    const { email, password } = req.body;
-    users
-      .findOne({ where: { email: email, password: password } })
-      .then(data => {
-        if (data) {
+    if (req.body.googleId) {
+      users
+        .findOrCreate({
+          where: { email: req.body.googleId },
+          defaults: {
+            password: req.body.googleId,
+            username: req.body.googleName,
+            mobile: req.body.googleId
+          }
+        })
+        .then(([result, created]) => {
           let token = jwt.sign(
             {
-              id: data.dataValues.id
+              id: result.dataValues.id
             },
             jwtObj.secret,
             {
@@ -67,13 +73,36 @@ module.exports = {
           res.status(200).json({
             token: token
           });
-        } else {
-          res.status(404).end();
-        }
-      })
-      .catch(err => {
-        res.status(404).send(err);
-      });
+        })
+        .catch(err => {
+          res.status(404).send(err);
+        });
+    } else {
+      const { email, password } = req.body;
+      users
+        .findOne({ where: { email: email, password: password } })
+        .then(data => {
+          if (data) {
+            let token = jwt.sign(
+              {
+                id: data.dataValues.id
+              },
+              jwtObj.secret,
+              {
+                expiresIn: '1h'
+              }
+            );
+            res.status(200).json({
+              token: token
+            });
+          } else {
+            res.status(404).end();
+          }
+        })
+        .catch(err => {
+          res.status(404).send(err);
+        });
+    }
   },
 
   signUpController: (req, res) => {
