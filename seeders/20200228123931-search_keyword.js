@@ -17,19 +17,23 @@ module.exports = {
       [
         {
           category_number: 1,
-          item: '이별노래'
+          item: '코로나'
         },
         {
           category_number: 2,
-          item: '내적댄스'
+          item: '브이로그'
         },
         {
           category_number: 3,
-          item: '잠안올때듣는노래'
+          item: '먹방'
         },
         {
           category_number: 4,
-          item: '위로노래'
+          item: '여행'
+        },
+        {
+          category_number: 5,
+          item: '넷플릭스 영화추천'
         }
       ],
       {}

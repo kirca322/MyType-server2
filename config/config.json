@@ -1,10 +1,11 @@
 {
   "development": {
-    "username": "root",
-    "password": "",
+    "username": "kirca",
+    "password": "justin12",
     "database": "MyType",
-    "host": "localhost",
+    "host": "mytype.canbse3a21fi.ap-northeast-2.rds.amazonaws.com",
     "dialect": "mysql",
-    "operatorsAliases": false
+    "operatorsAliases": false,
+    "port": 13306
   }
 }
