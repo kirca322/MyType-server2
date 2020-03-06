@@ -97,7 +97,7 @@ module.exports = {
             },
             jwtObj.secret,
             {
-              expiresIn: '1h'
+              expiresIn: '2m'
             }
           );
           res.status(200).json({
@@ -323,6 +323,7 @@ module.exports = {
         categories
           .findOne({ where: { category_name: categoryName } })
           .then(result => {
+            // console.log(result);
             if (result) {
               users_categories
                 .findOne({ where: { categories_id: result.dataValues.id } })
