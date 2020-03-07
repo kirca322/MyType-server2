@@ -313,7 +313,6 @@ module.exports = {
 
   categoryController: (req, res) => {
     const { categoryName } = req.body;
-
     let token = JSON.parse(req.headers.authorization);
     jwt.verify(token, jwtObj.secret, (err, decoded) => {
       if (err) {
@@ -323,10 +322,14 @@ module.exports = {
         categories
           .findOne({ where: { category_name: categoryName } })
           .then(result => {
-            // console.log(result);
             if (result) {
               users_categories
-                .findOne({ where: { categories_id: result.dataValues.id } })
+                .findOne({
+                  where: {
+                    categories_id: result.dataValues.id,
+                    users_id: decoded.id
+                  }
+                })
                 .then(result => {
                   users_categories_videos
                     .findAll({
